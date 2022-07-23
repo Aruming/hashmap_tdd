@@ -1,4 +1,4 @@
 package com.hashmap.exam;
 
-public class HashMap {
+public class HashMap<K, V> {
 }

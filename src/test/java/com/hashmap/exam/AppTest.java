@@ -7,4 +7,9 @@ public class AppTest {
     void 클래스가_존재한다() {
         HashMap map = new HashMap();
     }
+
+    @Test
+    void 제너릭이_가능하다() {
+        HashMap<String, Integer> map = new HashMap<>();
+    }
 }
