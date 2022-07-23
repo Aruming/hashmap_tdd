@@ -12,9 +12,15 @@ public class HashMap<K, V> {
     }
 
     void put(Object key, Object value){
-        keys[size] = key;
-        values[size] = value;
-        size++;
+        int index = indexOfKey(key);
+        if(index>=0){
+            values[index] = value;
+        }
+        else {
+            keys[size] = key;
+            values[size] = value;
+            size++;
+        }
     }
 
     V get(Object key){
