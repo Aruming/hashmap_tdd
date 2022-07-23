@@ -16,4 +16,23 @@ public class HashMap<K, V> {
         values[size] = value;
         size++;
     }
+
+    V get(Object key){
+        Object data = null;
+        int index = indexOfKey(key);
+
+        if(index>=0){
+            data = values[index];
+        }
+        return (V)data;
+    }
+
+    private int indexOfKey(Object key) {
+        for(int i=0;i<size;i++){
+            if(keys[i].equals(key)) {
+                return i;
+            }
+        }
+        return -1;
+    }
 }
