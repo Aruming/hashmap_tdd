@@ -10,23 +10,40 @@ public class HashMap<K, V> {
 
     HashMap(){
         size = 0;
-        keys = new Object[100];
-        values = new Object[100];
+        keys = new Object[2];
+        values = new Object[keys.length];
     }
 
-    void put(Object key, Object value){
+    void put(K key, V value){
         int index = indexOfKey(key);
         if(index>=0){
             values[index] = value;
         }
         else {
+            sizeUpIfFull();
+            
             keys[size] = key;
             values[size] = value;
             size++;
         }
     }
 
-    V get(Object key){
+    private void sizeUpIfFull() {
+        if(isFull()){
+            sizeUpArr();
+        }
+    }
+
+    private boolean isFull() {
+        return size == keys.length;
+    }
+
+    private void sizeUpArr() {
+        keys = Util.arr.sizeUp(keys);
+        values = Util.arr.sizeUp(values);
+    }
+
+    V get(K key){
         Object data = null;
         int index = indexOfKey(key);
 
@@ -36,7 +53,7 @@ public class HashMap<K, V> {
         return (V)data;
     }
 
-    private int indexOfKey(Object key) {
+    private int indexOfKey(K key) {
         for(int i=0;i<size;i++){
             if(keys[i].equals(key)) {
                 return i;
@@ -49,16 +66,17 @@ public class HashMap<K, V> {
         return size;
     }
 
-    void remove(Object key){
+    void remove(K key){
         int index = indexOfKey(key);
 
-        if(index>=0) {
-            for (int i = index; i < size - 1; i++) {
-                keys[i] = keys[i + 1];
-                values[i] = values[i + 1];
-            }
-            size--;
+        if(index == -1){
+            return;
         }
+
+        Util.arr.moveLeft(keys, index + 1, size - 1);
+        Util.arr.moveLeft(values, index + 1, size - 1);
+
+        size--;
     }
 
 
