@@ -41,4 +41,20 @@ public class HashMap<K, V> {
         }
         return -1;
     }
+
+    int size(){
+        return size;
+    }
+
+    void remove(Object key){
+        int index = indexOfKey(key);
+
+        if(index>=0) {
+            for (int i = index; i < size - 1; i++) {
+                keys[i] = keys[i + 1];
+                values[i] = values[i + 1];
+            }
+            size--;
+        }
+    }
 }
